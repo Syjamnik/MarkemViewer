@@ -1,2 +1,2 @@
-# GITREPO-MarkemViewer
+# MarkemViewer
  Allows for comunication between computer and Markem Smartdate 
