@@ -6,4 +6,8 @@
     <RootNamespace>MarkemViewer_Console</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MarkemViewer Library\MarkemViewer Library.csproj" />
+  </ItemGroup>
+
 </Project>
