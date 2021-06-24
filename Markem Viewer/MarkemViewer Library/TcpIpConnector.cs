@@ -66,36 +66,29 @@ namespace MarkemViewer_Library
                     Socket sender = new Socket(ipAddress.AddressFamily,
                         SocketType.Stream, ProtocolType.Tcp);
 
+ 
 
-                // Connect the socket to the remote endpoint. Catch any errors.    
-                try
-                    {
-                        // Connect to Remote EndPoint  
-                        sender.Connect(remoteEP);
+                    // Connect to Remote EndPoint  
+                    sender.Connect(remoteEP);
 
 
-                        // Encode the data string into a byte array.    
-                        byte[] msg = Encoding.ASCII.GetBytes(command);
+                    // Encode the data string into a byte array.    
+                    byte[] msg = Encoding.ASCII.GetBytes(command);
 
-                        // Send the data through the socket.    
-                        int bytesSent = sender.Send(msg);
+                    // Send the data through the socket.    
+                    int bytesSent = sender.Send(msg);
 
-                        // Receive the response from the remote device.    
-                        int bytesRec = sender.Receive(bytes);
-                        string receivedMessage = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    // Receive the response from the remote device.    
+                    int bytesRec = sender.Receive(bytes);
+                    string receivedMessage = Encoding.ASCII.GetString(bytes, 0, bytesRec);
 
 
 
-                        // Release the socket.    
-                        sender.Shutdown(SocketShutdown.Both);
-                        sender.Close();
+                    // Release the socket.    
+                    sender.Shutdown(SocketShutdown.Both);
+                    sender.Close();
 
                     return receivedMessage;
-                    }
-                    catch (Exception exc)
-                    {
-                    throw exc;
-                    }
 
 
                 }

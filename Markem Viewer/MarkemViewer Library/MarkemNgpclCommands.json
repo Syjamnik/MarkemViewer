@@ -1,0 +1,78 @@
+{
+  "exclude": [
+    "**/bin",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules",
+    "**/obj",
+    "**/platforms"
+  ],
+
+  "Printer Serial Number": {
+    "NGPCL": "{~UR|DV|PrinterSerial|}",
+    "Identifier": "PrinterSerial",
+    "Units": "Serial number"
+  },
+
+  "Controller Serial Number": {
+    "NGPCL": "{~UR|DV|ControllerSerial|}",
+    "Identifier": "ControllerSerial",
+    "Units": "Serial number"
+  },
+
+  "Controller Temperature": {
+    "NGPCL": "{~UR|DV|ControllerTemperature|}",
+    "Identifier": "ControllerTemperature",
+    "Units": "Degrees Celsius"
+  },
+
+  "Printer Temperature": {
+    "NGPCL": "{~UR|DV|PrinterTemperature|}",
+    "Identifier": "PrinterTemperature",
+    "Units": "Degrees Celsius"
+  },
+
+  "Print-head Temperature": {
+    "NGPCL": "{~UR|DV|PrintheadTemperature|}",
+    "Identifier": "PrintheadTemperature",
+    "Units": "Degrees Celsius"
+  },
+
+  "Print-head Voltage": {
+    "NGPCL": "{~UR|DV|PrintHeadVoltage|}",
+    "Identifier": "PrintHeadVoltage",
+    "Units": "Volts"
+  },
+
+  "Instant Average (pack rate)": {
+    "NGPCL": "{~UR|SV|InstantAverage|}",
+    "Identifier": "InstantAverage",
+    "Units": "Packs per minute"
+  },
+
+  "Long Term Average (pack rate)": {
+    "NGPCL": "{~UR|SV|LongTermAverage|}",
+    "Identifier": "LongTermAverage",
+    "Units": "Packs per minute"
+  },
+
+  "Ribbon Used Since Print-head Change": {
+    "NGPCL": "{~UR|SV|RibbonSincePrintheadChange|}",
+    "Identifier": "RibbonSincePrintheadChange",
+    "Units": "km"
+  },
+
+  "Prints Completed on Current Roll": {
+    "NGPCL": "{~UR|SV|PrintsOnCurrentRoll|}",
+    "Identifier": "PrintsOnCurrentRoll",
+    "Units": "number"
+  },
+
+  "Prints Completed on Last Roll": {
+    "NGPCL": "{~UR|SV|PrintsOnLastRoll|}",
+    "Identifier": "PrintsOnLastRoll",
+    "Units": "number"
+  }
+
+
+}

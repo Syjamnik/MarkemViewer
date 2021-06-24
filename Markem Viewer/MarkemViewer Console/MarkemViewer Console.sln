@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarkemViewer Console", "MarkemViewer Console.csproj", "{74844B9B-A363-4557-93ED-E0D47823D0DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkemViewer Library", "..\MarkemViewer Library\MarkemViewer Library.csproj", "{8ED223D2-AEA7-4759-8E57-D2D7FDC7E311}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarkemViewer Library", "..\MarkemViewer Library\MarkemViewer Library.csproj", "{8ED223D2-AEA7-4759-8E57-D2D7FDC7E311}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
