@@ -1,5 +1,5 @@
 ﻿
-namespace MarkemViewer_Library
+namespace MarkemViewer_Library.Interfaces
 {
     public interface IConnector
     {

@@ -1,78 +1,78 @@
 {
-  "exclude": [
-    "**/bin",
-    "**/bower_components",
-    "**/jspm_packages",
-    "**/node_modules",
-    "**/obj",
-    "**/platforms"
-  ],
-
   "Printer Serial Number": {
     "NGPCL": "{~UR|DV|PrinterSerial|}",
     "Identifier": "PrinterSerial",
-    "Units": "Serial number"
+    "Units": "Serial number",
+    "Description": ""
   },
 
   "Controller Serial Number": {
     "NGPCL": "{~UR|DV|ControllerSerial|}",
     "Identifier": "ControllerSerial",
-    "Units": "Serial number"
+    "Units": "Serial number",
+    "Description": ""
   },
 
   "Controller Temperature": {
     "NGPCL": "{~UR|DV|ControllerTemperature|}",
     "Identifier": "ControllerTemperature",
-    "Units": "Degrees Celsius"
+    "Units": "Degrees Celsius",
+    "Description": ""
   },
 
   "Printer Temperature": {
     "NGPCL": "{~UR|DV|PrinterTemperature|}",
     "Identifier": "PrinterTemperature",
-    "Units": "Degrees Celsius"
+    "Units": "Degrees Celsius",
+    "Description": ""
   },
 
   "Print-head Temperature": {
     "NGPCL": "{~UR|DV|PrintheadTemperature|}",
     "Identifier": "PrintheadTemperature",
-    "Units": "Degrees Celsius"
+    "Units": "Degrees Celsius",
+    "Description": ""
   },
 
   "Print-head Voltage": {
     "NGPCL": "{~UR|DV|PrintHeadVoltage|}",
     "Identifier": "PrintHeadVoltage",
-    "Units": "Volts"
+    "Units": "Volts",
+    "Description": ""
   },
 
   "Instant Average (pack rate)": {
     "NGPCL": "{~UR|SV|InstantAverage|}",
     "Identifier": "InstantAverage",
-    "Units": "Packs per minute"
+    "Units": "Packs per minute",
+    "Description": ""
   },
 
   "Long Term Average (pack rate)": {
     "NGPCL": "{~UR|SV|LongTermAverage|}",
     "Identifier": "LongTermAverage",
-    "Units": "Packs per minute"
+    "Units": "Packs per minute",
+    "Description": ""
   },
 
   "Ribbon Used Since Print-head Change": {
     "NGPCL": "{~UR|SV|RibbonSincePrintheadChange|}",
     "Identifier": "RibbonSincePrintheadChange",
-    "Units": "km"
+    "Units": "km",
+    "Description": ""
   },
 
   "Prints Completed on Current Roll": {
     "NGPCL": "{~UR|SV|PrintsOnCurrentRoll|}",
     "Identifier": "PrintsOnCurrentRoll",
-    "Units": "number"
+    "Units": "number",
+    "Description": ""
   },
 
   "Prints Completed on Last Roll": {
     "NGPCL": "{~UR|SV|PrintsOnLastRoll|}",
     "Identifier": "PrintsOnLastRoll",
-    "Units": "number"
+    "Units": "number",
+    "Description": ""
   }
-
-
 }
