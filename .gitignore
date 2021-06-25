@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# user-specific directories
+**/Markem Viewer/TestConsole
+
 # User-specific files
 *.rsuser
 *.suo
