@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MarkemViewer_Library.Interfaces
 {
-    interface INgpclJsonCommandsExtractor
+    public interface INgpclJsonCommandsExtractor
     {
 
 
@@ -13,6 +13,6 @@ namespace MarkemViewer_Library.Interfaces
         /// </summary>
         /// <param name="pathToJsonFile"> path to json file</param>
         /// <returns> list of available commands as object</returns>
-        List<NgpclCommandModel> GetListOfCommands(string pathToJsonFile);
+        NgpclCommandsModel GetListOfCommands(string pathToJsonFile);
     }
 }

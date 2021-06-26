@@ -7,7 +7,7 @@ using System.IO;
 
 namespace MarkemViewer_Library
 {
-    class NgpclJsonFileCommandExtractor : INgpclJsonCommandsExtractor
+    public class NgpclJsonFileCommandExtractor : INgpclJsonCommandsExtractor
     {
         
           protected readonly JsonSerializer serializer;
@@ -29,17 +29,16 @@ namespace MarkemViewer_Library
         /// </summary>
         /// <param name="pathToJsonFile"> path to json file</param>
         /// <returns> list of available commands as object</returns>
-        public List<NgpclCommandModel> GetListOfCommands(string pathToJsonFile)
+        public NgpclCommandsModel GetListOfCommands(string pathToJsonFile)
         {
-            
-            using (StreamReader reader= new StreamReader(pathToJsonFile))
+
+            using (StreamReader reader = new StreamReader(pathToJsonFile))
             {
-                return serializer.Deserialize<List<NgpclCommandModel>>(new JsonTextReader(reader));
+                var textReader = new JsonTextReader(reader);
+                return serializer.Deserialize<NgpclCommandsModel>(textReader);
             }
-           
+
         }
-
-
 
     }
 }

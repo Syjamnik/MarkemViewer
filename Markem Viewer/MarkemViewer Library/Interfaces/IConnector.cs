@@ -12,7 +12,8 @@ namespace MarkemViewer_Library.Interfaces
         /// <param name="ipAddr"> ip address</param>
         /// <param name="portNr"> port number</param>
         /// <param name="command">markem command</param>
+        /// <param name="WaitForResponse"> max time to await for response</param>
         /// <returns> response from markem instrument</returns>
-        string startCommunication(string ipAddr, int portNr, string command);
+        string startCommunication(string ipAddr, int portNr, string command, int WaitForResponse=3000);
     }
 }

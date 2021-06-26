@@ -3,6 +3,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace MarkemViewer_Library
 {
@@ -52,51 +53,70 @@ namespace MarkemViewer_Library
         /// <param name="ipAddr"> ip address</param>
         /// <param name="portNr"> port number</param>
         /// <param name="command">markem command</param>
+        /// <param name="WaitForResponse"> max time to await for response in miliseconds</param>
         /// <returns> response from markem instrument</returns>
-        public string startCommunication(string ipAddr,int portNr, string command)
+        public string startCommunication(string ipAddr,int portNr, string command, int WaitForResponse = 3000)
             {
-                byte[] bytes = new byte[1024];
+            byte[] bytes = new byte[1024];
+            Socket sender=null;
+            try
+            {
+                // Connect with a device
+                IPAddress ipAddress = IPAddress.Parse(ipAddr);
+                IPEndPoint remoteEP = new IPEndPoint(ipAddress, portNr);
 
-                try
+                // Create a TCP/IP socket.    
+                sender = new Socket(ipAddress.AddressFamily,
+                    SocketType.Stream, ProtocolType.Tcp);
+                sender.ReceiveTimeout = WaitForResponse+300;
+
+
+                // Connect to Remote EndPoint  
+                sender.Connect(remoteEP);
+
+
+                // Encode the data string into a byte array.    
+                byte[] msg = Encoding.ASCII.GetBytes(command);
+
+                // Send the data through the socket.    
+                int bytesSent = sender.Send(msg);
+
+                // Receive the response from the remote device.
+                string receivedMessage = "";
+
+                DateTime start = DateTime.Now;
+
+
+                // we give Markem instrument time for response
+                while (sender.Available <= 0 && (DateTime.Now- start).TotalMilliseconds< WaitForResponse)
                 {
-                    // Connect with a device
-                    IPAddress ipAddress = IPAddress.Parse(ipAddr);
-                    IPEndPoint remoteEP = new IPEndPoint(ipAddress, portNr);
-
-                    // Create a TCP/IP socket.    
-                    Socket sender = new Socket(ipAddress.AddressFamily,
-                        SocketType.Stream, ProtocolType.Tcp);
-
- 
-
-                    // Connect to Remote EndPoint  
-                    sender.Connect(remoteEP);
-
-
-                    // Encode the data string into a byte array.    
-                    byte[] msg = Encoding.ASCII.GetBytes(command);
-
-                    // Send the data through the socket.    
-                    int bytesSent = sender.Send(msg);
-
-                    // Receive the response from the remote device.    
-                    int bytesRec = sender.Receive(bytes);
-                    string receivedMessage = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-
-
-
-                    // Release the socket.    
-                    sender.Shutdown(SocketShutdown.Both);
-                    sender.Close();
-
-                    return receivedMessage;
-
+                    Thread.Sleep(10);
 
                 }
-                catch (Exception exc)
-                {
-                throw exc;
-                }
+
+                // 
+                int bytesRec = sender.Receive(bytes);
+                receivedMessage = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+
+                // Release the socket.    
+
+                return receivedMessage;
+
+
             }
+            catch (TimeoutException exc)
+            {
+                throw exc;
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            finally
+            {
+                sender.Shutdown(SocketShutdown.Both);
+                sender.Close();
+            }
+        }
     }
 }

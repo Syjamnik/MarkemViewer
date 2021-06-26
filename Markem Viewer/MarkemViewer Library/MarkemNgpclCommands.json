@@ -1,78 +1,45 @@
 {
-  "Printer Serial Number": {
-    "NGPCL": "{~UR|DV|PrinterSerial|}",
-    "Identifier": "PrinterSerial",
-    "Units": "Serial number",
-    "Description": ""
-  },
+  "Commands": [
 
-  "Controller Serial Number": {
-    "NGPCL": "{~UR|DV|ControllerSerial|}",
-    "Identifier": "ControllerSerial",
-    "Units": "Serial number",
-    "Description": ""
-  },
+    {
+      "NGPCL": "{~UR|DV|PrinterSerial|}",
+      "Identifier": "PrinterSerial",
+      "Units": "Serial number",
+      "CommandName": "Printer Serial Number",
+      "Description": ""
+    },
 
-  "Controller Temperature": {
-    "NGPCL": "{~UR|DV|ControllerTemperature|}",
-    "Identifier": "ControllerTemperature",
-    "Units": "Degrees Celsius",
-    "Description": ""
-  },
+    {
+      "NGPCL": "{~UR|DV|ControllerSerial|}",
+      "Identifier": "ControllerSerial",
+      "Units": "Serial number",
+      "CommandName": "Controller Serial Number",
+      "Description": ""
+    },
 
-  "Printer Temperature": {
-    "NGPCL": "{~UR|DV|PrinterTemperature|}",
-    "Identifier": "PrinterTemperature",
-    "Units": "Degrees Celsius",
-    "Description": ""
-  },
+    {
+      "NGPCL": "{~UR|DV|ControllerTemperature|}",
+      "Identifier": "ControllerTemperature",
+      "Units": "Degrees Celsius",
+      "CommandName": "Controller Temperature",
+      "Description": ""
+    },
 
-  "Print-head Temperature": {
-    "NGPCL": "{~UR|DV|PrintheadTemperature|}",
-    "Identifier": "PrintheadTemperature",
-    "Units": "Degrees Celsius",
-    "Description": ""
-  },
+    {
+      "NGPCL": "{~UR|SV|InstantAverage|}",
+      "Identifier": "InstantAverage",
+      "Units": "Packs per minute",
+      "CommandName": "Instant Average (pack rate)",
+      "Description": ""
+    },
 
-  "Print-head Voltage": {
-    "NGPCL": "{~UR|DV|PrintHeadVoltage|}",
-    "Identifier": "PrintHeadVoltage",
-    "Units": "Volts",
-    "Description": ""
-  },
+    {
+      "NGPCL": "{~UR|SV|LongTermAverage|}",
+      "Identifier": "LongTermAverage",
+      "Units": "Packs per minute",
+      "CommandName": "Long Term Average (pack rate)",
+      "Description": ""
+    }
+  ]
 
-  "Instant Average (pack rate)": {
-    "NGPCL": "{~UR|SV|InstantAverage|}",
-    "Identifier": "InstantAverage",
-    "Units": "Packs per minute",
-    "Description": ""
-  },
-
-  "Long Term Average (pack rate)": {
-    "NGPCL": "{~UR|SV|LongTermAverage|}",
-    "Identifier": "LongTermAverage",
-    "Units": "Packs per minute",
-    "Description": ""
-  },
-
-  "Ribbon Used Since Print-head Change": {
-    "NGPCL": "{~UR|SV|RibbonSincePrintheadChange|}",
-    "Identifier": "RibbonSincePrintheadChange",
-    "Units": "km",
-    "Description": ""
-  },
-
-  "Prints Completed on Current Roll": {
-    "NGPCL": "{~UR|SV|PrintsOnCurrentRoll|}",
-    "Identifier": "PrintsOnCurrentRoll",
-    "Units": "number",
-    "Description": ""
-  },
-
-  "Prints Completed on Last Roll": {
-    "NGPCL": "{~UR|SV|PrintsOnLastRoll|}",
-    "Identifier": "PrintsOnLastRoll",
-    "Units": "number",
-    "Description": ""
-  }
 }
