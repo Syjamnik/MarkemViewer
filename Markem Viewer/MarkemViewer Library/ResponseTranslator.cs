@@ -13,20 +13,21 @@ namespace MarkemViewer_Library
         /// </summary>
         /// <param name="ngpclResponse"> return value from instrument</param>
         /// <returns>returns dictionary <(string)ValueName, (string)Value></returns>
-        public Dictionary<string, string> translateResponse(string ngpclResponse)
+        public Dictionary<string, string> TranslateResponse(string ngpclResponse)
         {
+            // check if there is failure  response and throw error 
+            IsResponseFaulty(ngpclResponse);
             Dictionary<string, string> producedResponse = new Dictionary<string, string>();
 
-            // check if there is failure  response
-            if (IsResponseInvalid(ngpclResponse))
-            {
-                producedResponse.Add("Response", "Failure");
-                return producedResponse;
-            }
+            
 
+            
             bool singleValueResponse = IsReturningSingleValue(ngpclResponse);
 
+            // removing unused chars
             ngpclResponse = PrepareResponse(ngpclResponse);
+
+
             if (singleValueResponse)
             {
                 producedResponse.Add("Response", ngpclResponse);
@@ -36,9 +37,27 @@ namespace MarkemViewer_Library
             }
             else
             {
+                string[] splittedResponse= ngpclResponse.Split('|');
+
+
+                string key= "Response";
+                string value="Value";
+                for (int i = 0; i < splittedResponse.Length; i++)
+                {
+                    // even value -> response type  odd value -> response value
+                    if(i%2== 0)
+                    {
+                        key = "Response " + splittedResponse[i];
+                    }
+                    else
+                    {
+                        value = splittedResponse[i];
+                        producedResponse.Add(key, value);
+                    }
+                }
+
                 return producedResponse;
             }
-
 
         }
 
@@ -60,7 +79,7 @@ namespace MarkemViewer_Library
 
             if (counter > 2)
                 return false;
-            if (counter == 2)
+            if (counter == 2 || ngpclResponse== "{~UD1|}")
                 return true;
             else
                 throw new ArgumentException("there are less than 2 x '|' chars. This response is faulty");
@@ -74,7 +93,7 @@ namespace MarkemViewer_Library
         /// </summary>
         /// <param name="ngpclResponse"> return value from instrument</param>
         /// <returns>true if there is failure response</returns>
-        protected bool IsResponseInvalid(string ngpclResponse)
+        protected bool IsResponseFaulty(string ngpclResponse)
         {
             if (ngpclResponse == "{~UD1|}")
                 return true;
@@ -84,8 +103,14 @@ namespace MarkemViewer_Library
    
         protected string PrepareResponse(string ngpclResponse)
         {
-            ngpclResponse = ngpclResponse.Remove(0, 6);
-            ngpclResponse = ngpclResponse.Remove(ngpclResponse.LastIndexOf("}")-1, 2);
+            if(ngpclResponse.Length>=7)
+                ngpclResponse = ngpclResponse.Remove(0, 6);
+
+            if(ngpclResponse.Contains("}"))
+                ngpclResponse = ngpclResponse.Remove(ngpclResponse.LastIndexOf("}"));
+
+            if(ngpclResponse.Contains("|"))
+                ngpclResponse = ngpclResponse.Remove(ngpclResponse.LastIndexOf("|"));
 
             return ngpclResponse;
         }

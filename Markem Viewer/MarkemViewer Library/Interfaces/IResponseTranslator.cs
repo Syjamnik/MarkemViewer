@@ -15,7 +15,7 @@ namespace MarkemViewer_Library.Interfaces
         /// </summary>
         /// <param name="ngpclResponse"> return value from instrument</param>
         /// <returns>returns dictionary <(string)ValueName, (string)Value></returns>
-        Dictionary<string, string> translateResponse(string ngpclResponse);
+        Dictionary<string, string> TranslateResponse(string ngpclResponse);
         
     }
 }
