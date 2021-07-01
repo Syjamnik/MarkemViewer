@@ -7,7 +7,7 @@ namespace MarkemViewer_Library.Interfaces
     /// <summary>
     /// allows you to get all information returned from instrument
     /// </summary>
-    interface IResponseTranslator
+    public interface IResponseTranslator
     {
 
         /// <summary>

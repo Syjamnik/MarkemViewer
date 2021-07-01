@@ -1,8 +1,6 @@
 ﻿using MarkemViewer_Library.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
+using System;
 using System.IO;
 
 namespace MarkemViewer_Library
@@ -31,12 +29,24 @@ namespace MarkemViewer_Library
         /// <returns> list of available commands as object</returns>
         public NgpclCommandsModel GetListOfCommands(string pathToJsonFile)
         {
-
-            using (StreamReader reader = new StreamReader(pathToJsonFile))
+            try
             {
-                var textReader = new JsonTextReader(reader);
-                return serializer.Deserialize<NgpclCommandsModel>(textReader);
+                using (StreamReader reader = new StreamReader(pathToJsonFile))
+                {
+                    var textReader = new JsonTextReader(reader);
+                    return serializer.Deserialize<NgpclCommandsModel>(textReader);
+                }
             }
+            catch (FileNotFoundException ex)
+            {
+
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
 
         }
 

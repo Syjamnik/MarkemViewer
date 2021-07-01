@@ -6,7 +6,7 @@
       "Identifier": "PrinterSerial",
       "Units": "Serial number",
       "CommandName": "Printer Serial Number",
-      "Description": ""
+      "Description": "Returns printer serial number"
     },
 
     {
@@ -14,7 +14,7 @@
       "Identifier": "ControllerSerial",
       "Units": "Serial number",
       "CommandName": "Controller Serial Number",
-      "Description": ""
+      "Description": "Returns controller serial number"
     },
 
     {
@@ -22,23 +22,37 @@
       "Identifier": "ControllerTemperature",
       "Units": "Degrees Celsius",
       "CommandName": "Controller Temperature",
-      "Description": ""
+      "Description": "Returns Controller temperature"
     },
 
     {
       "NGPCL": "{~UR|SV|InstantAverage|}",
       "Identifier": "InstantAverage",
       "Units": "Packs per minute",
-      "CommandName": "Instant Average (pack rate)",
-      "Description": ""
+      "CommandName": "Instant Average",
+      "Description": "Returns current average pack rate"
     },
 
     {
       "NGPCL": "{~UR|SV|LongTermAverage|}",
       "Identifier": "LongTermAverage",
       "Units": "Packs per minute",
-      "CommandName": "Long Term Average (pack rate)",
-      "Description": ""
+      "CommandName": "Long Term Average",
+      "Description": "Returns long term average pack rate. Time is set in the controller"
+    },
+    {
+      "NGPCL": "{~CR|}",
+      "Identifier": "CountsRequest",
+      "Units": "Bags",
+      "CommandName": "Counts Request",
+      "Description": "Returns counters from the printer Where: \nBATCH- actual production counter, \nTOTAL- total production counter, \nTFAIL - total bad made bags counter, \nTBATCH- actual bad made bags counter "
+    },
+    {
+      "NGPCL": "{~JR|}",
+      "Identifier": "JobRequest",
+      "Units": "job number ",
+      "CommandName": "Job Request",
+      "Description": "Returns current job number"
     }
   ]
 

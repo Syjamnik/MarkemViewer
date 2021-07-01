@@ -108,6 +108,7 @@ namespace MarkemViewer_Library
             {
                 throw exc;
             }
+
             catch (Exception exc)
             {
                 throw exc;
