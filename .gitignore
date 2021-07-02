@@ -6,6 +6,7 @@
 # user-specific directories
 **/Markem Viewer/TestConsole
 
+
 # User-specific files
 *.rsuser
 *.suo
@@ -354,4 +355,3 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/Markem Viewer/MarkemViewer CommandSender
