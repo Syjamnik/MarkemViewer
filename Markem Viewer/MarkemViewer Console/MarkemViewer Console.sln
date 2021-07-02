@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "..\TestConso
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T_MarkemViewer Library", "..\T_MarkemViewer Library\T_MarkemViewer Library.csproj", "{1CC4162F-CB13-4994-8794-7A48CC7EC2FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkemViewer CommandSender", "..\MarkemViewer CommandSender\MarkemViewer CommandSender.csproj", "{34E240A7-01AB-48F2-AA13-59586639065D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarkemViewer CommandSender", "..\MarkemViewer CommandSender\MarkemViewer CommandSender.csproj", "{34E240A7-01AB-48F2-AA13-59586639065D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkemViewer PerformanceMonitor", "..\MarkemViewer PerformanceMonitor\MarkemViewer PerformanceMonitor.csproj", "{61AA0153-6E38-43A8-A36F-5D9A6DF585B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{34E240A7-01AB-48F2-AA13-59586639065D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34E240A7-01AB-48F2-AA13-59586639065D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34E240A7-01AB-48F2-AA13-59586639065D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61AA0153-6E38-43A8-A36F-5D9A6DF585B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61AA0153-6E38-43A8-A36F-5D9A6DF585B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61AA0153-6E38-43A8-A36F-5D9A6DF585B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61AA0153-6E38-43A8-A36F-5D9A6DF585B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
