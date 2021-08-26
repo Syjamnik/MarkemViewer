@@ -1,37 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace MarkemViewer_CommandSender
 {
-    static class IpAddressValidator
+    public static class IpAddressValidator
     {
-        public static bool ValidateIpAddress(string ipAddress)
+        public static bool ValidateIpAddress(this string ipAddress)
         {
-            string[] splittedIP= ipAddress.Split('.');
+            string[] splittedAddress = ipAddress.Split('.');
 
-            if (splittedIP.Length != 4)
+
+            if (splittedAddress.Length != 4)
                 return false;
 
-            for (int i = 0; i < splittedIP.Length; i++)
+            for (int i = 0; i < splittedAddress.Length; i++)
             {
-                int IpPartAsNumber = 0;
-                
-                try
-                {
-                    IpPartAsNumber = Int32.Parse(splittedIP[i]);
-                }
-                catch (FormatException ex)
-                {
+                if (!splittedAddress[i].All(x => char.IsNumber(x) && x>=0 && x<=255) || string.IsNullOrWhiteSpace(splittedAddress[i]))
                     return false;
-                }
-                if(IpPartAsNumber<0 || IpPartAsNumber > 254)
-                {
+
+                if (i == 3 && (Convert.ToInt32(splittedAddress[i]) < 1 || Convert.ToInt32(splittedAddress[i]) > 254))
                     return false;
-                }
 
             }
-
 
             return true;
         }

@@ -24,35 +24,35 @@ namespace MarkemViewer_CommandSender
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        /// <summary>
-        /// contains downloaded markem comands
-        /// </summary>
-        public NgpclCommandsModel NgpclCommands { get; set; }
         /// <summary>
         ///  contains last response from markem instrument
         /// </summary>
         public string LastInstrumentResponse { get; set; }
-        IResponseTranslator responseTranslator;
-       
-        private INgpclJsonCommandsExtractor commandReceiver;
+
         /// <summary>
         ///  contains path to file with markem commands
         /// </summary>
-        string pathForJsonFileWithNgpcl = System.IO.Path.GetFullPath("MarkemNgpclCommands.json");
-        private int MaximumResponseTime = 3000;
+        public string pathForJsonFileWithNgpcl { get; private set; } = "../MarkemNgpclCommands.json";
+       
+        private int _maximumResponseTime = 1000;
+        private readonly IResponseTranslator _responseTranslator;
+        private readonly INgpclJsonCommandsExtractor _commandReceiver;
+
+
+
 
         public MainWindow()
         {
             InitializeComponent();
 
-            commandReceiver = new NgpclJsonFileCommandExtractor( new JsonSerializer());
-            responseTranslator = new ResponseTranslator();
+            _responseTranslator = new ResponseTranslator();
+            _commandReceiver = new NgpclJsonFileCommandExtractor( new JsonSerializer());
 
             try
             {
-                NgpclCommands = commandReceiver.GetListOfCommands(pathForJsonFileWithNgpcl);
-                ngcplCommands.ItemsSource = NgpclCommands.Commands;
+                // loading up list of markem commands 
+                ngcplCommands.ItemsSource = _commandReceiver.GetListOfCommands(pathForJsonFileWithNgpcl).Commands;
+                 
             }
             catch (FileNotFoundException ex)
             {
@@ -60,17 +60,15 @@ namespace MarkemViewer_CommandSender
                 MessageBox.Show("Sorry, something went wrong. Please ensure that you have MarkemNgpclCommands.json in your Directory. \n\n " + ex.Message);
 
             }
-
         }
 
         private void ReceiveDataFromInstrument_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 NgpclCommandModel selectedCommand = (NgpclCommandModel)ngcplCommands.SelectedItem;
-                LastInstrumentResponse = TcpIpConnector.Instance.startCommunication(ipAddresses.Text, 21000, selectedCommand.NGPCL, MaximumResponseTime);
-                ngpclCommandResult.Text = convertResponseDictionaryToString(responseTranslator.TranslateResponse(LastInstrumentResponse));
+                LastInstrumentResponse = TcpIpConnector.Instance.startCommunication(ipAddresses.Text, 21000, selectedCommand.NGPCL, _maximumResponseTime);
+                ngpclCommandResult.Text = convertResponseDictionaryToString(_responseTranslator.TranslateResponse(LastInstrumentResponse));
             }
             catch (Exception ex)
             {
@@ -79,28 +77,13 @@ namespace MarkemViewer_CommandSender
 
         }
 
-        #region button enable/disable methods
-        private void EnableOrDistableSubmitButtonCalc()
-        {
-            submitButton.IsEnabled= IpAddressValidator.ValidateIpAddress(ipAddresses.Text) && (ngcplCommands.SelectedItem != null);
-        }
+        private void ipAddresses_TextChanged(object sender, TextChangedEventArgs e)=> EnableOrDistableControlObject(submitButton, ()=> ipAddresses.Text.ValidateIpAddress() && (ngcplCommands.SelectedItem != null));
 
-        private void EnableOrDistableSetAdvancedParametersButtonCalc()
-        {
-            setAdvancedConfiguration.IsEnabled = NumberValidator.ValidateNumber(maxResponseTime.Text);
-        }
-
-        #endregion
-     
-        private void ipAddresses_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            EnableOrDistableSubmitButtonCalc();
-        }
-
+        private void maxResponseTime_TextChanged(object sender, TextChangedEventArgs e) => EnableOrDistableControlObject(setAdvancedConfiguration, () => maxResponseTime.Text.ValidatePositiveNumber());
 
         private void ngcplCommands_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EnableOrDistableSubmitButtonCalc();
+            EnableOrDistableControlObject(submitButton, () => IpAddressValidator.ValidateIpAddress(ipAddresses.Text) && (ngcplCommands.SelectedItem != null));
 
             try
             {
@@ -115,16 +98,11 @@ namespace MarkemViewer_CommandSender
             }
         }
 
-        private void maxResponseTime_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            EnableOrDistableSetAdvancedParametersButtonCalc();
-        }
-
         private void setAdvancedConfiguration_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                MaximumResponseTime = Int32.Parse(maxResponseTime.Text);
+                _maximumResponseTime = (maxResponseTime.Text.ValidatePositiveNumber())? Convert.ToInt32(maxResponseTime.Text): _maximumResponseTime;
 
             }
             catch (FormatException ex)
@@ -136,21 +114,31 @@ namespace MarkemViewer_CommandSender
                 MessageBox.Show("Sorry, something went wrong. Send this message to application provider \n\n "+ ex.Message);
             }
         }
-        
-        private string convertResponseDictionaryToString( Dictionary<string,string> dict)
+
+        private string convertResponseDictionaryToString(Dictionary<string, string> dict)
         {
             StringBuilder strBuilder = new StringBuilder();
             foreach (var item in dict)
-            {
-                strBuilder.Append(item.Key);
-                strBuilder.Append(": ");
-                strBuilder.Append(item.Value);
-                strBuilder.Append("\n");
-            }
+                strBuilder.Append(item.Key).Append(": ").Append(item.Value).Append("\n");
 
             return strBuilder.ToString();
         }
-    
-    
+
+        private void startCyclicRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void stopCyclicRequestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+
+
+
+        private void EnableOrDistableControlObject(Control buttonRef, Func<bool> func) => buttonRef.IsEnabled = func.Invoke();
+
     }
 }

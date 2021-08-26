@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace MarkemViewer_CommandSender
 {
-     static class NumberValidator
+     public static class NumberValidator
     {
-        private static readonly Regex regex = new Regex("[^0-9]+");
-
-        public static bool ValidateNumber(string textToValidate)
+        public static bool ValidatePositiveNumber(this string textToValidate) 
         {
-            return !regex.IsMatch(textToValidate);
+            if ((textToValidate.Count() > 1 && textToValidate[0].Equals('0')) || string.IsNullOrEmpty(textToValidate))
+                return false;
+
+            return textToValidate.All(char.IsNumber);
+
+
+
         }
+
     }
 }
